@@ -15,14 +15,14 @@ const fetchBraintreeKey = () => {
   switch (localBraintreeOverride
     ? localBraintreeOverride.toUpperCase()
     : 'default') {
-    case 'LIVE': {
-      // eslint-disable-next-line no-console
-      console.warn('Braintree key was overrriden to use LIVE key')
-      return 'cqfs78rf9rcrc6wk'
-    }
-    default: {
-      return 'cqfs78rf9rcrc6wk'
-    }
+  case 'LIVE': {
+    // eslint-disable-next-line no-console
+    console.warn('Braintree key was overrriden to use LIVE key')
+    return 'cqfs78rf9rcrc6wk'
+  }
+  default: {
+    return 'cqfs78rf9rcrc6wk'
+  }
   }
 }
 

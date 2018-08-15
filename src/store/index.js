@@ -4,18 +4,21 @@ import { reducer as formReducer } from 'redux-form/immutable'
 import { Map } from 'immutable'
 import { middleware as reduxPackMiddleware } from 'redux-pack'
 import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 
 import { immutableize } from '../utils/immutable'
 import { debounceMiddleware } from '../utils/redux'
 
 import app from './app/duck'
-import session from './session/duck'
+import session, { LOGOUT_USER } from './session/duck'
 
 const middleware = [
   thunk,
   reduxPackMiddleware,
   debounceMiddleware
 ]
+
+middleware.push(createLogger({}))
 
 const appReducers = combineReducers({
   app,
@@ -24,9 +27,9 @@ const appReducers = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-//   if (action.type === LOGOUT_USER) {
-//     state = undefined
-//   }
+  if (action.type === LOGOUT_USER) {
+    state = undefined
+  }
   return appReducers(state, action)
 }
 

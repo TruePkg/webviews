@@ -3,15 +3,20 @@ import styled, { injectGlobal } from 'styled-components'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { space } from 'styled-system'
 import PropTypes from 'prop-types'
+import asyncComponent from '../../utils/asyncComponent'
+import withStyles from "@material-ui/core/styles/withStyles";
 
-import Login from '../../components/Login'
+// import Login from '../../components/Login'
+
+const Login = asyncComponent(
+  /* istanbul ignore next */ () => import('../../views/Login/container')
+)
+
+const Dashboard = asyncComponent(
+  () => import('../../views/Dashboard/container')
+)
 
 injectGlobal`
-  @font-face {
-    font-family: 'Noto Sans';
-    src: url('https://fonts.googleapis.com/css?family=Noto+Sans');
-  }
-
   body {
     font-family: 'Noto Sans';
     background-position: center bottom;
@@ -68,11 +73,13 @@ export default class AppComponent extends PureComponent {
     this.props.removeNotification(notification.uid)
 
   render() {
+    console.log('may inhere boys')
     return (
       <StyledApp>
         <StyledAppContainer>
           <Switch>
             <Route exact path="/login" component={Login} />            
+            <Route exact path="/dashboard" component={Dashboard} />            
             <Route render={() => <Redirect to="/login" />} />
           </Switch>
         </StyledAppContainer>

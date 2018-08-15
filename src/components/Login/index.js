@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import StyledLogin from './style'
 
-export default class Login extends Component {
+export class Login extends Component {
   static propTypes = {
     // PropTypes go here
   }
@@ -16,3 +17,15 @@ export default class Login extends Component {
     return <StyledLogin>Login</StyledLogin>
   }
 }
+
+const mapState = state => {
+  return {
+    
+  }
+}
+
+const mapDispatch = () => ({
+
+})
+
+export default connect(mapState, mapDispatch)(Login)

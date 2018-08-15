@@ -1,9 +1,19 @@
-import { List } from 'immutable'
-
 import fetch from '../../utils/fetch'
 
-export const fetchExample = () => {
-  return fetch('/example')
-    .then(res => res.json())
-    .then(payload => new List(payload))
+export const loginUser = async credentials => {
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+  const payload = await res.json()
+  return { token: payload.body }
+}
+
+export const assumeSession = async userId => {
+  const res = await fetch(`/session/token/assume/${userId}`)
+  const payload = await res.json()
+  return payload.data[0]
 }

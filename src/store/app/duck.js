@@ -44,9 +44,9 @@ export default function reducer(state = new AppState(), action = {}) {
   if (!(state instanceof AppState)) return toInitialState(immutableize(state))
 
   switch (action.type) {
-    default: {
-      return state
-    }
+  default: {
+    return state
+  }
   }
 }
 
