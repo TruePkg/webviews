@@ -18,6 +18,7 @@ import SearchBar from './search'
 import Category from './category'
 import List from './list'
 import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
 
 import PropTypes from 'prop-types'
 
@@ -31,6 +32,12 @@ export class PriceListComponent extends PureComponent {
   }
 
   render() {
+    if (this.props.quotes) {
+      return <Redirect to='/quotes' />
+    }
+    if (this.props.catalog) {
+      return <Redirect to='/catalog' />
+    }
     console.log(this.props, 'props fma')
     return (
       <Grid fluid>
@@ -48,9 +55,13 @@ export class PriceListComponent extends PureComponent {
 const mapState = state => {
   const listView = state.get('priceList').listView
   const category = state.get('priceList').category
+  const quotes = state.get('priceList').quotes
+  const catalog = state.get('priceList').catalog
   return {
     listView,
-    category
+    category,
+    quotes,
+    catalog
   }
 }
 

@@ -109,6 +109,22 @@ export default function reducer(state = new PriceListState(), action = {}) {
       })
     }
 
+    case TOGGLE_CATALOG: {
+      return state.merge({
+        priceList: false,
+        catalog: true,
+        quotes: false
+      })
+    }
+
+    case TOGGLE_QUOTES: {
+      return state.merge({
+        priceList: false,
+        catalog: false,
+        quotes: true
+      })
+    }
+
     case TOGGLE_LISTVIEW: {
       return state.merge({
         listView: true,

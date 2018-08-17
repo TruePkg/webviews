@@ -13,6 +13,7 @@ import Catalog from "../Catalog/container";
 import FlexView from "react-flexview";
 import Button from "../../components/CustomButtons/Button.jsx";
 import Footer from './footer'
+import { toggleCatalog } from "../../store/priceList/duck";
 
 // import Login from '../../components/Login'
 
@@ -79,11 +80,23 @@ export default class AppComponent extends PureComponent {
     this.props.removeNotification(notification.uid);
 
   render() {
-    console.log("may inhere boys");
+    console.log(this.props.priceList, this.props.quotes, this.props.catalog, 'asdffasdfsfasfd');
+    const {
+      togglePriceList,
+      toggleQuotes,
+      toggleCatalog,
+      priceList,
+      quotes,
+      catalog
+    } = this.props
     return (
       <StyledApp>
         <Navbar />
-        <Footer />
+        <Footer 
+          togglePriceList={togglePriceList}
+          toggleQuotes={toggleQuotes}
+          toggleCatalog={toggleCatalog}
+        />
         <StyledAppContainer>
           <Switch>
             <Route exact path="/login" component={Login} />
