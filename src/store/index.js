@@ -11,6 +11,7 @@ import { debounceMiddleware } from '../utils/redux'
 
 import app from './app/duck'
 import session, { LOGOUT_USER } from './session/duck'
+import priceList from './priceList/duck'
 
 const middleware = [
   thunk,
@@ -23,6 +24,7 @@ middleware.push(createLogger({}))
 const appReducers = combineReducers({
   app,
   session,
+  priceList,
   form: formReducer
 })
 

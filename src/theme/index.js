@@ -72,7 +72,7 @@ injectGlobal`
   }
   html { min-height: 100%; }
   body {
-    background-color: ${themeVars.backgroundColor};
+    // background-color: ${themeVars.backgroundColor};
     color: ${themeVars.defaultTextColor};
     margin: 0;
     padding: 0;

@@ -1,29 +1,35 @@
-import React, { PureComponent } from 'react'
-import styled, { injectGlobal } from 'styled-components'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { space } from 'styled-system'
-import PropTypes from 'prop-types'
-import asyncComponent from '../../utils/asyncComponent'
+import React, { PureComponent } from "react";
+import styled, { injectGlobal } from "styled-components";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { space, zIndex } from "styled-system";
+import PropTypes from "prop-types";
+import asyncComponent from "../../utils/asyncComponent";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Navbar from "../Navbar/component";
+import NavPills from "../../components/NavPills/NavPills.jsx";
+import PriceList from "../PriceList/container";
+import Quotes from "../Quotes/container";
+import Catalog from "../Catalog/container";
+import FlexView from "react-flexview";
+import Button from "../../components/CustomButtons/Button.jsx";
+import Footer from './footer'
 
 // import Login from '../../components/Login'
 
 const Login = asyncComponent(
-  /* istanbul ignore next */ () => import('../../views/Login/container')
-)
+  /* istanbul ignore next */ () => import("../../views/Login/container")
+);
 
-const Dashboard = asyncComponent(
-  () => import('../../views/Dashboard/container')
-)
+const Dashboard = asyncComponent(() =>
+  import("../../views/Dashboard/container")
+);
 
 injectGlobal`
   body {
-    font-family: 'Noto Sans';
     background-position: center bottom;
     background-attachment: fixed;
     background-size: contain;
     background-repeat: no-repeat;
-    // background-color: #FFF;
 
     /*iPhone 8 Plus and lower */
     @media only screen
@@ -31,19 +37,19 @@ injectGlobal`
       background-image: none;
     }
   }
-`
+`;
 
 const StyledApp = styled.div`
   // Styles go here
   // background-color: #000;
-`
+`;
 const StyledAppContainer = styled.div`
   position: relative;
   max-width: ${props => props.theme.viewportMaxWidth};
   margin: 0 auto;
   ${space};
   // background-color: #000;
-`
+`;
 
 export default class AppComponent extends PureComponent {
   static propTypes = {
@@ -55,35 +61,40 @@ export default class AppComponent extends PureComponent {
     apiOverride: PropTypes.string,
     stripeOverride: PropTypes.string,
     removeNotification: PropTypes.func,
-    resumeSession: PropTypes.func,
-  }
+    resumeSession: PropTypes.func
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       topPadding: 1
-    }
+    };
   }
 
   handleHeaderResize = topPadding => {
-    this.setState(() => ({ topPadding }))
-  }
+    this.setState(() => ({ topPadding }));
+  };
 
   handleRemoveNotification = notification =>
-    this.props.removeNotification(notification.uid)
+    this.props.removeNotification(notification.uid);
 
   render() {
-    console.log('may inhere boys')
+    console.log("may inhere boys");
     return (
       <StyledApp>
+        <Navbar />
+        <Footer />
         <StyledAppContainer>
           <Switch>
-            <Route exact path="/login" component={Login} />            
-            <Route exact path="/dashboard" component={Dashboard} />            
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/pricelist" component={PriceList} />
+            <Route exact path="/quotes" component={Quotes} />
+            <Route exact path="/catalog" component={Catalog} />
             <Route render={() => <Redirect to="/login" />} />
           </Switch>
         </StyledAppContainer>
       </StyledApp>
-    )
+    );
   }
 }

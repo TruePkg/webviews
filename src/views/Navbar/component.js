@@ -6,6 +6,7 @@ import CustomDropdown from "../../components/CustomDropdown/CustomDropdown.jsx";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Button from "../../components/CustomButtons/Button.jsx";
+// import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx'
 
 // import PropTypes from 'prop-types'
 import Header from "../../components/Header/Header.jsx";
@@ -28,8 +29,9 @@ class Navbar extends React.Component {
     return (
       <Header
         brand="True Package"
-        color="dark"
+        color="info"
         rightLinks={
+
           <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <Button
@@ -38,7 +40,7 @@ class Navbar extends React.Component {
                 onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                Something
+                Price List
               </Button>
             </ListItem>
             <ListItem className={classes.listItem}>
@@ -48,10 +50,20 @@ class Navbar extends React.Component {
                 onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                Yet another thing
+                Quotes
               </Button>
             </ListItem>
             <ListItem className={classes.listItem}>
+              <Button
+                href="#pablo"
+                className={classes.navLink}
+                onClick={e => e.preventDefault()}
+                color="transparent"
+              >
+                Catalog
+              </Button>
+            </ListItem>
+            {/* <ListItem className={classes.listItem}>
               <Button
                 justIcon
                 round
@@ -62,7 +74,7 @@ class Navbar extends React.Component {
               >
                 <Email className={classes.icons} />
               </Button>
-            </ListItem>
+            </ListItem> */}
             <ListItem className={classes.listItem}>
               <CustomDropdown
                 left

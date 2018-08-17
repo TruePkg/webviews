@@ -5,7 +5,7 @@ import {
   successColor,
   warningColor,
   dangerColor
-} from "assets/jss/material-kit-react.jsx";
+} from "../../material-kit-react.jsx";
 
 const navPillsStyle = theme => ({
   root: {
@@ -74,7 +74,7 @@ const navPillsStyle = theme => ({
     color: "inherit"
   },
   contentWrapper: {
-    marginTop: "20px"
+    // marginTop: "20px"
   },
   primary: {
     "&,&:hover": {

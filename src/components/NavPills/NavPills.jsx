@@ -9,12 +9,13 @@ import SwipeableViews from "react-swipeable-views";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import FlexView from 'react-flexview'
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
+import GridContainer from "../../components/Grid/GridContainer.jsx";
+import GridItem from "../../components/Grid/GridItem.jsx";
 
-import navPillsStyle from "assets/jss/material-kit-react/components/navPillsStyle.jsx";
+import navPillsStyle from "../../assets/jss/material-kit-react/components/navPillsStyle.jsx";
 
 class NavPills extends React.Component {
   constructor(props) {
@@ -103,10 +104,10 @@ class NavPills extends React.Component {
         <GridItem {...horizontal.contentGrid}>{tabContent}</GridItem>
       </GridContainer>
     ) : (
-      <div>
-        {tabButtons}
+      <FlexView hAlignContent='center' column>
         {tabContent}
-      </div>
+        {tabButtons}
+      </FlexView>
     );
   }
 }
