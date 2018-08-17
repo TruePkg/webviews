@@ -45,7 +45,7 @@ export class PriceListComponent extends PureComponent {
         {
           this.props.category ?
           <Category /> :
-          <List /> 
+          <List filteredItems={this.props.filteredItems}/> 
         }
       </Grid>
     )
@@ -57,11 +57,13 @@ const mapState = state => {
   const category = state.get('priceList').category
   const quotes = state.get('priceList').quotes
   const catalog = state.get('priceList').catalog
+  const filteredItems = state.get('priceList').filteredItems
   return {
     listView,
     category,
     quotes,
-    catalog
+    catalog,
+    filteredItems
   }
 }
 

@@ -80,7 +80,6 @@ export default class AppComponent extends PureComponent {
     this.props.removeNotification(notification.uid);
 
   render() {
-    console.log(this.props.priceList, this.props.quotes, this.props.catalog, 'asdffasdfsfasfd');
     const {
       togglePriceList,
       toggleQuotes,

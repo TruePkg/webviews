@@ -16,6 +16,7 @@ export const TOGGLE_QUOTES= 'true-package/priceList/TOGGLE_QUOTES'
 export const TOGGLE_CATALOG = 'true-package/priceList/TOGGLE_CATALOG'
 export const TOGGLE_LISTVIEW = 'true-package/priceList/TOGGLE_LISTVIEW'
 export const TOGGLE_CATEGORY = 'true-package/priceList/TOGGLE_CATEGORY'
+export const FILTER_ITEMS = 'true-package/priceList/FILTER_ITEMS'
 
 /**
  * Private: Initial State
@@ -29,7 +30,8 @@ class PriceListState extends Record({
   quotes: false,
   catalog: false,
   listView: true,
-  category: false
+  category: false,
+  filteredItems: []
 }) {}
 
 const toInitialState = state =>
@@ -39,7 +41,8 @@ const toInitialState = state =>
     quotes: state.get('quotes'),
     catalog: state.get('catalog'),
     listView: state.get('listView'),
-    category: state.get('category')
+    category: state.get('category'),
+    filteredItems: List(state.get('filteredItems'))
   })
 
 /**
@@ -74,6 +77,11 @@ export const toggleListView = bool => ({
 export const toggleCategory = bool => ({
   type: TOGGLE_CATEGORY,
   payload: bool
+})
+
+export const filterItems = array => ({
+  type: FILTER_ITEMS,
+  payload: array
 })
 
 /**
@@ -136,6 +144,12 @@ export default function reducer(state = new PriceListState(), action = {}) {
       return state.merge({
         listView: false,
         category: true
+      })
+    }
+
+    case FILTER_ITEMS: {
+      return state.merge({
+        filteredItems: payload
       })
     }
 

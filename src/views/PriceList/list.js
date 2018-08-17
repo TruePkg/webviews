@@ -16,6 +16,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
 import SearchBar from './search'
 import Category from './category'
+// import { toJS } from 'immutable'
 
 // import PropTypes from 'prop-types'
 
@@ -27,11 +28,35 @@ export default class PriceListComponent extends PureComponent {
   }
 
   render() {
+    //   console.log(this.props.filteredItems.toJS(), 'propsssssss')
     return (
         <Paper>
           <Table>
             <TableBody>
-              <TableRow>
+              {
+                this.props.filteredItems.map(item => {
+                    console.log(item.get('description'), 'asfasfsdf')
+                  return (
+                    <TableRow>
+                    <TableCell>
+                      {item.get('name')}
+                    </TableCell>
+                    <TableCell>
+                      {item.get('sku')}
+                    </TableCell>
+                    <TableCell>
+                      {item.get('descriptions')}
+                    </TableCell>
+                    <TableCell>
+                      <FlexView hAlignContent='right'>
+                        <FontAwesome name='fas fa-plus-circle' size='2x' style={{ color: 'grey' }}/>
+                      </FlexView>
+                    </TableCell>
+                  </TableRow>
+                  )
+                })
+              }
+              {/* <TableRow>
                 <TableCell>
                   list item 1
                 </TableCell>
@@ -40,7 +65,7 @@ export default class PriceListComponent extends PureComponent {
                     <FontAwesome name='fas fa-plus-circle' size='2x' style={{ color: 'grey' }}/>
                   </FlexView>
                 </TableCell>
-              </TableRow>
+              </TableRow> */}
 
             </TableBody>
           </Table>
