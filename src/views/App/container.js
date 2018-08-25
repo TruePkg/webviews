@@ -7,7 +7,7 @@ import {
   selectStashedToken
 } from '../../store/session/duck'
 import { toggleQuotes, toggleCatalog, togglePriceList } from '../../store/priceList/duck'
-
+import { showQuoteOptions } from '../../store/quotes/duck'
 
 import AppComponent from './component'
 
@@ -19,7 +19,7 @@ const AppContainer = connect(
     catalog: state.get('priceList').catalog,
     quotes: state.get('priceList').catalog
   }),
-  { logoutUser, resumeSession, toggleQuotes, toggleCatalog, togglePriceList  }
+  { logoutUser, resumeSession, toggleQuotes, toggleCatalog, togglePriceList, showQuoteOptions  }
 )(AppComponent)
 
 export default AppContainer

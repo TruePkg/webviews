@@ -30,7 +30,7 @@ const noFetchingAnotherTokenError = () =>
 class SessionStateDefaults extends Record({
   phase: INIT,
   token: null,
-  stashedToken: null,
+  stashedToken: null
 }) {}
 
 export class SessionState extends SessionStateDefaults {
@@ -199,7 +199,8 @@ export default function reducer(state = new SessionState(), action = {}) {
   }
 }
 
-export const selectToken = state => state.getIn(['session', 'token'])
+// export const selectToken = state => state.getIn(['session', 'token'])
+export const selectToken = state => state.get('session').token
 export const selectStashedToken = state =>
   state.getIn(['session', 'stashedToken'])
 

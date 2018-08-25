@@ -32,13 +32,12 @@ export class PriceListComponent extends PureComponent {
   }
 
   render() {
-    if (this.props.quotes) {
-      return <Redirect to='/quotes' />
-    }
-    if (this.props.catalog) {
-      return <Redirect to='/catalog' />
-    }
-    console.log(this.props, 'props fma')
+    // if (this.props.quotes) {
+    //   return <Redirect to='/quotes' />
+    // }
+    // if (this.props.catalog) {
+    //   return <Redirect to='/catalog' />
+    // }
     return (
       <Grid fluid>
         <SearchBar />

@@ -12,7 +12,7 @@ import * as Api from './api'
 
 export const FETCH_EXAMPLE = 'true-package/priceList/FETCH_EXAMPLE'
 export const TOGGLE_PRICELIST = 'true-package/priceList/TOGGLE_PRICELIST'
-export const TOGGLE_QUOTES= 'true-package/priceList/TOGGLE_QUOTES'
+export const TOGGLE_QUOTES = 'true-package/priceList/TOGGLE_QUOTES'
 export const TOGGLE_CATALOG = 'true-package/priceList/TOGGLE_CATALOG'
 export const TOGGLE_LISTVIEW = 'true-package/priceList/TOGGLE_LISTVIEW'
 export const TOGGLE_CATEGORY = 'true-package/priceList/TOGGLE_CATEGORY'

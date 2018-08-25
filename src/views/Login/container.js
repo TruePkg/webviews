@@ -7,7 +7,7 @@ import LoginComponent from './component'
 const LoginContainer = connect(
   // Map state to props
   state => ({
-    token: selectToken(state)
+    token: selectToken(state),
   }),
   // Map actions to dispatch and props
   // { loginUser }

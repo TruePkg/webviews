@@ -22,16 +22,17 @@ export class QuotesComponent extends PureComponent {
 
   render() {
     const { newQuote, drafts, priceList, catalog } = this.props
-    console.log(newQuote, drafts)
-    if (priceList) {
-      return <Redirect to='/pricelist'/>
-    }
-    if (catalog) {
-      return <Redirect to='/catalog'/>
-    }
+    // if (priceList) {
+    //   return <Redirect to='/pricelist'/>
+    // }
+    // if (catalog) {
+    //   return <Redirect to='/catalog'/>
+    // }
+
     if (!newQuote && !drafts) {
       return <Options toggleNewQuote={this.props.toggleNewQuote} toggleDrafts={this.props.toggleDrafts}/>
     }
+    
     if (newQuote) {
       return <NewQuote />
     }

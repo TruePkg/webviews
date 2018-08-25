@@ -3,6 +3,7 @@ import styled, { injectGlobal } from "styled-components";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { space, zIndex } from "styled-system";
 import PropTypes from "prop-types";
+import PrivateRoute from '../Navbar/router'
 import asyncComponent from "../../utils/asyncComponent";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Navbar from "../Navbar/component";
@@ -86,24 +87,33 @@ export default class AppComponent extends PureComponent {
       toggleCatalog,
       priceList,
       quotes,
-      catalog
+      catalog,
+      token,
+      showQuoteOptions
     } = this.props
     return (
       <StyledApp>
-        <Navbar />
-        <Footer 
-          togglePriceList={togglePriceList}
-          toggleQuotes={toggleQuotes}
-          toggleCatalog={toggleCatalog}
-        />
+        { this.props.token ? 
+        <div>
+          <Navbar logoutUser={this.props.logoutUser}/>
+          <Footer 
+            // togglePriceList={togglePriceList}
+            // toggleQuotes={toggleQuotes}
+            // toggleCatalog={toggleCatalog}
+            showQuoteOptions={showQuoteOptions}
+          />
+        </div>
+        :
+        null
+      }
         <StyledAppContainer>
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/pricelist" component={PriceList} />
-            <Route exact path="/quotes" component={Quotes} />
-            <Route exact path="/catalog" component={Catalog} />
-            <Route render={() => <Redirect to="/login" />} />
+            <PrivateRoute token={token} path="/dashboard" component={Dashboard} />
+            <PrivateRoute token={token} path="/pricelist" component={PriceList} />
+            <PrivateRoute token={token} path="/quotes" component={Quotes} />
+            <PrivateRoute token={token} path="/catalog" component={Catalog} />
+            <PrivateRoute render={() => <Redirect to="/login" />} />
           </Switch>
         </StyledAppContainer>
       </StyledApp>

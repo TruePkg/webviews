@@ -7,11 +7,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Button from "../../components/CustomButtons/Button.jsx";
 // import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx'
-
+import Dropzone from 'react-dropzone'
 // import PropTypes from 'prop-types'
 import Header from "../../components/Header/Header.jsx";
 import navbarsStyle from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx";
-
+import axios from 'axios'
 
 // const StyledDashboard = styled.div`// Styles go here`
 
@@ -19,9 +19,34 @@ class Navbar extends React.Component {
   // static propTypes = {
   //   // PropTypes go here
   // }
+  constructor() {
+    super()
+  }
 
   componentDidMount() {
     // this.props.logoutUser()
+  }
+
+  onDrop = async files => {
+    const file = files[0]
+    const url = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/users/signature`, {
+      fileName: file.name,
+      fileType: file.type
+    })
+    console.log(url, 'eyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+    const { data } = url
+    axios
+    .put(data.signedRequest, file, { headers: { 'Content-type': file.type } })
+    .then(res => {
+      console.log(`https://truepackageinventory.s3.amazonaws.com/${file.name}`, 'blahblah')
+      return `https://truepackageinventory.s3.amazonaws.com/${file.name}`
+    })
+    .catch(err => {
+      return err
+    })
+    const postToDB = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/csv`, {
+      csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`
+    })
   }
 
   render() {
@@ -35,70 +60,29 @@ class Navbar extends React.Component {
           <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <Button
-                href="#pablo"
+                href=''
                 className={classes.navLink}
-                onClick={e => e.preventDefault()}
+                onClick={()=> {}}
                 color="transparent"
               >
-                Price List
+                <label>
+                  Update Inventory
+                  <Dropzone 
+                    style={{display: 'none'}}
+                    onDrop={this.onDrop}  
+                  />                
+                </label>
               </Button>
             </ListItem>
             <ListItem className={classes.listItem}>
               <Button
                 href="#pablo"
                 className={classes.navLink}
-                onClick={e => e.preventDefault()}
+                onClick={this.props.logoutUser}
                 color="transparent"
               >
-                Quotes
+                Logout
               </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="#pablo"
-                className={classes.navLink}
-                onClick={e => e.preventDefault()}
-                color="transparent"
-              >
-                Catalog
-              </Button>
-            </ListItem>
-            {/* <ListItem className={classes.listItem}>
-              <Button
-                justIcon
-                round
-                href="#pablo"
-                className={classes.notificationNavLink}
-                onClick={e => e.preventDefault()}
-                color="rose"
-              >
-                <Email className={classes.icons} />
-              </Button>
-            </ListItem> */}
-            <ListItem className={classes.listItem}>
-              <CustomDropdown
-                left
-                caret={false}
-                hoverColor="black"
-                dropdownHeader="True Package Options"
-                buttonText={
-                  <img
-                    src='https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&h=350'
-                    className={classes.img}
-                    alt="profile"
-                  />
-                }
-                buttonProps={{
-                  className:
-                    classes.navLink + " " + classes.imageDropdownButton,
-                  color: "transparent"
-                }}
-                dropdownList={[
-                  "Me",
-                  "Settings and other stuff",
-                  "Sign out"
-                ]}
-              />
             </ListItem>
           </List>
         }

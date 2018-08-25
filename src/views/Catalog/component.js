@@ -11,12 +11,12 @@ export default class CatalogComponent extends PureComponent {
   }
 
   render() {
-    if (this.props.quotes) {
-      return <Redirect to='/quotes' />
-    }
-    if (this.props.priceList) {
-      return <Redirect to='/pricelist' />
-    }
+    // if (this.props.quotes) {
+    //   return <Redirect to='/quotes' />
+    // }
+    // if (this.props.priceList) {
+    //   return <Redirect to='/pricelist' />
+    // }
     return (
       <StyledCatalog>
         <h1>Catalog</h1>

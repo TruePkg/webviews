@@ -13,6 +13,7 @@ import * as Api from './api'
 export const FETCH_EXAMPLE = 'true-package/quotes/FETCH_EXAMPLE'
 export const TOGGLE_NEWQUOTE = 'true-package/quotes/TOGGLE_NEWQUOTE'
 export const TOGGLE_DRAFTS = 'true-package/quotes/TOGGLE_DRAFTS'
+export const SHOW_QUOTE_OPTIONS = 'true-package/quotes/SHOW_QUOTE_OPTIONS'
 
 /**
  * Private: Initial State
@@ -50,6 +51,10 @@ export const toggleNewQuote = bool => ({
   payload: bool
 })
 
+export const showQuoteOptions = () => ({
+  type: SHOW_QUOTE_OPTIONS
+})
+
 /**
  * Public: Reducer
  */
@@ -85,6 +90,13 @@ export default function reducer(state = new QuotesState(), action = {}) {
     case TOGGLE_NEWQUOTE: {
       return state.merge({
         newQuote: true,
+        drafts: false
+      })
+    }
+
+    case SHOW_QUOTE_OPTIONS: {
+      return state.merge({
+        newQuote: false,
         drafts: false
       })
     }

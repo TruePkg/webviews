@@ -87,9 +87,6 @@ export class SearchBar extends PureComponent {
   }
 
   filterTheDamnItems = (e) => {
-    console.log('pleaseee')
-    // console.log(e.target.value, 'dsfsfdsafdsfs')
-    // console.log(this.state.items, 'dfsadfsadf')
     const filteredItems = this.state.items.filter(item => {
       const vals = Object.values(item)
       console.log(vals, 'vals')

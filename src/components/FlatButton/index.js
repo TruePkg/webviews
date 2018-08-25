@@ -47,7 +47,7 @@ const defaultProps = {
   bg: 'transparent',
   primary: false,
   danger: false,
-  success: false,
+  success: true,
   cancel: false,
   circle: false,
   fullWidth: false,
