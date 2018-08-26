@@ -29,11 +29,12 @@ export class SearchBar extends PureComponent {
     category: PropTypes.bool,
     toggleCategory: PropTypes.func,
     toggleListView: PropTypes.func,
-    filterItems: PropTypes.func
+    filterItems: PropTypes.func,
+    inventory: PropTypes.array
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       items: [
         {
@@ -87,14 +88,15 @@ export class SearchBar extends PureComponent {
   }
 
   filterTheDamnItems = (e) => {
-    const filteredItems = this.state.items.filter(item => {
-      const vals = Object.values(item)
-      console.log(vals, 'vals')
-      console.log(e.target.value, 'input value')
-      return vals.indexOf(e.target.value) !== -1
-    })
-    console.log(filteredItems, 'safdsafd')
-    this.props.filterItems(filteredItems)
+    console.log(this.props.inventory)
+    // const filteredItems = this.state.items.filter(item => {
+    //   const vals = Object.values(item)
+    //   console.log(vals, 'vals')
+    //   console.log(e.target.value, 'input value')
+    //   return vals.indexOf(e.target.value) !== -1
+    // })
+    // console.log(filteredItems, 'safdsafd')
+    // this.props.filterItems(filteredItems)
   }
 
   render() {
@@ -171,10 +173,12 @@ const mapState = state => {
   const category = state.get('priceList').category
   const listView = state.get('priceList').listView
   const filteredItems = state.get('priceList').filteredItems
+  const inventory = state.get('priceList').inventory
   return {
     category,
     listView,
-    filteredItems
+    filteredItems,
+    inventory
   }
 }
 

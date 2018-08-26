@@ -14,8 +14,11 @@ import Table from '@material-ui/core/Table'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
+import TableHead from '@material-ui/core/TableHead'
 import SearchBar from './search'
 import Category from './category'
+import { ColumnNames } from './columnNames'
+import Hidden from '@material-ui/core/Hidden'
 // import { toJS } from 'immutable'
 
 // import PropTypes from 'prop-types'
@@ -32,21 +35,29 @@ export default class PriceListComponent extends PureComponent {
     return (
         <Paper>
           <Table>
+            <TableHead>{ColumnNames}</TableHead>
             <TableBody>
               {
-                this.props.filteredItems.map(item => {
-                    console.log(item.get('description'), 'asfasfsdf')
+                this.props.inventory.map(item => {
+                    console.log(item.get('Description'), 'asfasfsdf')
                   return (
                     <TableRow>
                     <TableCell>
-                      {item.get('name')}
+                      {item.get('Name')}
                     </TableCell>
                     <TableCell>
-                      {item.get('sku')}
+                      {item.get('SKU')}
                     </TableCell>
-                    <TableCell>
-                      {item.get('descriptions')}
-                    </TableCell>
+                    <Hidden xsDown>
+                      <TableCell>
+                        {item.get('Description')}
+                      </TableCell>
+                    </Hidden>
+                    <Hidden xsDown>
+                      <TableCell>
+                        {item.get('Price')}
+                      </TableCell>
+                    </Hidden>                    
                     <TableCell>
                       <FlexView hAlignContent='right'>
                         <FontAwesome name='fas fa-plus-circle' size='2x' style={{ color: 'grey' }}/>

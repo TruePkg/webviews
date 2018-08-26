@@ -28,23 +28,18 @@ export class PriceListComponent extends PureComponent {
   static propTypes = {
     // PropTypes go here
     listView: PropTypes.bool,
-    category: PropTypes.bool
+    category: PropTypes.bool,
+    // inventory: PropTypes.array
   }
 
   render() {
-    // if (this.props.quotes) {
-    //   return <Redirect to='/quotes' />
-    // }
-    // if (this.props.catalog) {
-    //   return <Redirect to='/catalog' />
-    // }
     return (
       <Grid fluid>
-        <SearchBar />
+        <SearchBar/>
         {
           this.props.category ?
           <Category /> :
-          <List filteredItems={this.props.filteredItems}/> 
+          <List inventory={this.props.inventory}/> 
         }
       </Grid>
     )
@@ -57,12 +52,14 @@ const mapState = state => {
   const quotes = state.get('priceList').quotes
   const catalog = state.get('priceList').catalog
   const filteredItems = state.get('priceList').filteredItems
+  const inventory = state.get('priceList').inventory
   return {
     listView,
     category,
     quotes,
     catalog,
-    filteredItems
+    filteredItems,
+    inventory
   }
 }
 

@@ -17,6 +17,7 @@ export const TOGGLE_CATALOG = 'true-package/priceList/TOGGLE_CATALOG'
 export const TOGGLE_LISTVIEW = 'true-package/priceList/TOGGLE_LISTVIEW'
 export const TOGGLE_CATEGORY = 'true-package/priceList/TOGGLE_CATEGORY'
 export const FILTER_ITEMS = 'true-package/priceList/FILTER_ITEMS'
+export const UPDATE_PRICELIST = 'true-package/priceList/UPDATE_PRICELIST'
 
 /**
  * Private: Initial State
@@ -31,7 +32,8 @@ class PriceListState extends Record({
   catalog: false,
   listView: true,
   category: false,
-  filteredItems: []
+  filteredItems: [],
+  inventory: []
 }) {}
 
 const toInitialState = state =>
@@ -42,7 +44,8 @@ const toInitialState = state =>
     catalog: state.get('catalog'),
     listView: state.get('listView'),
     category: state.get('category'),
-    filteredItems: List(state.get('filteredItems'))
+    filteredItems: List(state.get('filteredItems')),
+    inventory: List(state.get('inventory'))
   })
 
 /**
@@ -84,6 +87,12 @@ export const filterItems = array => ({
   payload: array
 })
 
+//update pricelist
+export const updatePriceList = files => ({
+  type: UPDATE_PRICELIST,
+  promise: Api.postToDB(files)
+})
+
 /**
  * Public: Reducer
  */
@@ -92,6 +101,7 @@ export default function reducer(state = new PriceListState(), action = {}) {
   if (!(state instanceof PriceListState)) return toInitialState(immutableize(state))
 
   const { type, payload } = action
+  console.log(action.payload, 'asdsafsfdafd')
 /* eslint-disable */
   switch (type) {
     case FETCH_EXAMPLE: {
@@ -103,6 +113,25 @@ export default function reducer(state = new PriceListState(), action = {}) {
           return prevState.merge({
             phase: SUCCESS,
             exampleThings: action.payload.things,
+            error: null
+          })
+        }
+      })
+    }
+
+    case UPDATE_PRICELIST: {
+      return handle(state, action, {
+        start: prevState => prevState.merge({ phase: LOADING, error: null }),
+        failure: prevState =>
+          prevState.merge({
+            phase: ERROR,
+            error: payload.error
+          }),
+        success: prevState => {
+          console.log('made it in hereeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+          return prevState.merge({
+            phase: SUCCESS,
+            inventory: action.payload.data,
             error: null
           })
         }

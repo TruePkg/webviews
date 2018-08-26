@@ -8,7 +8,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Button from "../../components/CustomButtons/Button.jsx";
 // import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx'
 import Dropzone from 'react-dropzone'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import Header from "../../components/Header/Header.jsx";
 import navbarsStyle from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx";
 import axios from 'axios'
@@ -16,11 +16,12 @@ import axios from 'axios'
 // const StyledDashboard = styled.div`// Styles go here`
 
 class Navbar extends React.Component {
-  // static propTypes = {
-  //   // PropTypes go here
-  // }
-  constructor() {
-    super()
+  static propTypes = {
+    // PropTypes go here
+    updatePriceList: PropTypes.func
+  }
+  constructor(props) {
+    super(props)
   }
 
   componentDidMount() {
@@ -28,25 +29,25 @@ class Navbar extends React.Component {
   }
 
   onDrop = async files => {
-    const file = files[0]
-    const url = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/users/signature`, {
-      fileName: file.name,
-      fileType: file.type
-    })
-    console.log(url, 'eyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
-    const { data } = url
-    axios
-    .put(data.signedRequest, file, { headers: { 'Content-type': file.type } })
-    .then(res => {
-      console.log(`https://truepackageinventory.s3.amazonaws.com/${file.name}`, 'blahblah')
-      return `https://truepackageinventory.s3.amazonaws.com/${file.name}`
-    })
-    .catch(err => {
-      return err
-    })
-    const postToDB = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/csv`, {
-      csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`
-    })
+    // const file = files[0]
+    // const url = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/users/signature`, {
+    //   fileName: file.name,
+    //   fileType: file.type
+    // })
+    // const { data } = url
+    // axios
+    // .put(data.signedRequest, file, { headers: { 'Content-type': file.type } })
+    // .then(res => {
+    //   console.log(`https://truepackageinventory.s3.amazonaws.com/${file.name}`, 'blahblah')
+    //   return `https://truepackageinventory.s3.amazonaws.com/${file.name}`
+    // })
+    // .catch(err => {
+    //   return err
+    // })
+    // const postToDB = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/csv`, {
+    //   csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`
+    // })
+    await this.props.updatePriceList(files)
   }
 
   render() {

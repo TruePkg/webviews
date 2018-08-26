@@ -89,13 +89,14 @@ export default class AppComponent extends PureComponent {
       quotes,
       catalog,
       token,
-      showQuoteOptions
+      showQuoteOptions,
+      updatePriceList
     } = this.props
     return (
       <StyledApp>
         { this.props.token ? 
         <div>
-          <Navbar logoutUser={this.props.logoutUser}/>
+          <Navbar updatePriceList={updatePriceList} logoutUser={this.props.logoutUser}/>
           <Footer 
             // togglePriceList={togglePriceList}
             // toggleQuotes={toggleQuotes}
