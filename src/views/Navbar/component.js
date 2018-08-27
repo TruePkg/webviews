@@ -18,7 +18,8 @@ import axios from 'axios'
 class Navbar extends React.Component {
   static propTypes = {
     // PropTypes go here
-    updatePriceList: PropTypes.func
+    updatePriceList: PropTypes.func,
+    token: PropTypes.string
   }
   constructor(props) {
     super(props)
@@ -29,25 +30,8 @@ class Navbar extends React.Component {
   }
 
   onDrop = async files => {
-    // const file = files[0]
-    // const url = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/users/signature`, {
-    //   fileName: file.name,
-    //   fileType: file.type
-    // })
-    // const { data } = url
-    // axios
-    // .put(data.signedRequest, file, { headers: { 'Content-type': file.type } })
-    // .then(res => {
-    //   console.log(`https://truepackageinventory.s3.amazonaws.com/${file.name}`, 'blahblah')
-    //   return `https://truepackageinventory.s3.amazonaws.com/${file.name}`
-    // })
-    // .catch(err => {
-    //   return err
-    // })
-    // const postToDB = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/csv`, {
-    //   csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`
-    // })
-    await this.props.updatePriceList(files)
+    console.log(this.props.token)
+    await this.props.updatePriceList(files, this.props.token)
   }
 
   render() {

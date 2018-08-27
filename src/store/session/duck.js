@@ -121,11 +121,11 @@ export default function reducer(state = new SessionState(), action = {}) {
       success: prevState => {
         window.localStorage.setItem(
           Config.get('/LocalStorageKeys/Authorization'),
-          payload.token
+          payload
         )
         return prevState.merge({
           phase: SUCCESS,
-          token: payload.token
+          token: payload
         })
       }
     })

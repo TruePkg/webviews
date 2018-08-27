@@ -9,7 +9,7 @@ export const loginUser = async credentials => {
     body: JSON.stringify(credentials)
   })
   const payload = await res.json()
-  return { token: payload.body }
+  return payload
 }
 
 export const assumeSession = async userId => {

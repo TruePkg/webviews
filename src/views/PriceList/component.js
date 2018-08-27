@@ -20,6 +20,8 @@ import List from './list'
 import { connect } from 'react-redux'
 import { Redirect } from "react-router-dom";
 
+import { getInventory } from '../../store/priceList/duck'
+
 import PropTypes from 'prop-types'
 
 const StyledPriceList = styled.div`// Styles go here`
@@ -29,8 +31,13 @@ export class PriceListComponent extends PureComponent {
     // PropTypes go here
     listView: PropTypes.bool,
     category: PropTypes.bool,
+    token: PropTypes.string
     // inventory: PropTypes.array
   }
+
+  async componentDidMount() {
+    await this.props.getInventory(this.props.token)
+  } 
 
   render() {
     return (
@@ -53,13 +60,15 @@ const mapState = state => {
   const catalog = state.get('priceList').catalog
   const filteredItems = state.get('priceList').filteredItems
   const inventory = state.get('priceList').inventory
+  const token = state.get('session').token
   return {
     listView,
     category,
     quotes,
     catalog,
     filteredItems,
-    inventory
+    inventory,
+    token
   }
 }
 

@@ -24,7 +24,7 @@ export const fetchExample = () => {
 //   }
 // }
 
-export const postToDB = async (files) => {
+export const postToDB = async (files, token) => {
   // console.log('made it in hereeeeeeeeee', updatePriceList)
   const file = files[0]
   const fileName = file.name
@@ -37,10 +37,16 @@ export const postToDB = async (files) => {
     console.log(data.signedRequest, 'signedRequest')
     await axios.put(data.signedRequest, file, { headers: { 'Content-type': file.type } })
     const inventory = await axios.post(`${process.env.REACT_APP_API_HOSTNAME}/csv`, {
-      csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`
+      csvUrl: `https://truepackageinventory.s3.amazonaws.com/${file.name}`,
+      token
     })
     return inventory
   } catch (error) {
     return []
   }
+}
+
+export const getInventory = async token => {
+  const inventory = await axios.get(`${process.env.REACT_APP_API_HOSTNAME}/users/inventory?token=${token}`)
+  return inventory.data.items
 }

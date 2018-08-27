@@ -38,10 +38,10 @@ export default class PriceListComponent extends PureComponent {
             <TableHead>{ColumnNames}</TableHead>
             <TableBody>
               {
-                this.props.inventory.map(item => {
+                this.props.inventory.map((item, i) => {
                     console.log(item.get('Description'), 'asfasfsdf')
                   return (
-                    <TableRow>
+                    <TableRow key={i}>
                     <TableCell>
                       {item.get('Name')}
                     </TableCell>

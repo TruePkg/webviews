@@ -38,7 +38,7 @@ export default class LoginComponent extends PureComponent {
       data.get("organization"),
       data.get("role"),
       data.get("password"),
-      "wwrrerererererereer"
+      "yup"
     );
     const { error: loginError, payload } = await this.props.loginUser({
       email: data.get("email").toLowerCase(),
@@ -50,7 +50,7 @@ export default class LoginComponent extends PureComponent {
     if (loginError) {
       throw new SubmissionError({ _error: payload.message });
     }
-    window.location.reload()
+    // window.location.reload()
   };
 
   render() {
