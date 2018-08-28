@@ -30,108 +30,26 @@ export class SearchBar extends PureComponent {
     toggleCategory: PropTypes.func,
     toggleListView: PropTypes.func,
     filterItems: PropTypes.func,
-    inventory: PropTypes.array
+    inventory: PropTypes.object
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      items: [
-        {
-          name: 'boxes',
-          descriptions: 'boxes straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'lids',
-          descriptions: 'lids straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'lids',
-          descriptions: 'lids straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'bubble wrap',
-          descriptions: 'bubble wrap straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'bubble wrap',
-          descriptions: 'bubble wrap straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'bubble wrap',
-          descriptions: 'bubble wrap straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'styrofoam peanuts',
-          descriptions: 'styrofoam peanuts straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'mattress covers',
-          descriptions: 'mattress covers straight from the shire',
-          sku: '247365'
-        },
-        {
-          name: 'tape',
-          descriptions: 'tape straight from the shire',
-          sku: '247365'
-        }
-      ],
-      filteredItems: []
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   filterTheDamnItems = (e) => {
-    console.log(this.props.inventory)
-    // const filteredItems = this.state.items.filter(item => {
-    //   const vals = Object.values(item)
-    //   console.log(vals, 'vals')
-    //   console.log(e.target.value, 'input value')
-    //   return vals.indexOf(e.target.value) !== -1
-    // })
-    // console.log(filteredItems, 'safdsafd')
-    // this.props.filterItems(filteredItems)
+    const { inventory } = this.props
+    console.log(inventory, 'inventory')
+    const filteredList = inventory.filter(item => {
+      const name = item.get('Name')
+      const sku = item.get('SKU')
+      const description = item.get('Description')
+      return ([name, sku, description].indexOf(e.target.value) !== -1)
+    })
+    this.props.filterItems(filteredList)
   }
 
   render() {
-    // const fakeData = [
-    //   {
-    //     name: 'boxes',
-    //     descriptions: 'boxes straight from the shire',
-    //     sku: '247365'
-    //   },
-    //   {
-    //     name: 'lids',
-    //     descriptions: 'lids straight from the shire',
-    //     sku: '247365'
-    //   },
-    //   {
-    //     name: 'bubble wrap',
-    //     descriptions: 'bubble wrap straight from the shire',
-    //     sku: '247365'
-    //   },
-    //   {
-    //     name: 'styrofoam peanuts',
-    //     descriptions: 'styrofoam peanuts straight from the shire',
-    //     sku: '247365'
-    //   },
-    //   {
-    //     name: 'mattress covers',
-    //     descriptions: 'mattress covers straight from the shire',
-    //     sku: '247365'
-    //   },
-    //   {
-    //     name: 'tape',
-    //     descriptions: 'tape straight from the shire',
-    //     sku: '247365'
-    //   }
-    // ]
     return (
         <Row>
             <FlexView width='100%' hAlignContent='center' row='true'>

@@ -31,6 +31,9 @@ export default class PriceListComponent extends PureComponent {
   }
 
   render() {
+    const { filteredItems, inventory } = this.props
+    console.log(filteredItems, 'the filteered items in list.js!')
+    let itemsToDisplay = filteredItems.size > 0 ? filteredItems : inventory
     //   console.log(this.props.filteredItems.toJS(), 'propsssssss')
     return (
         <Paper>
@@ -38,8 +41,8 @@ export default class PriceListComponent extends PureComponent {
             <TableHead>{ColumnNames}</TableHead>
             <TableBody>
               {
-                this.props.inventory.map((item, i) => {
-                    console.log(item.get('Description'), 'asfasfsdf')
+                itemsToDisplay.map((item, i) => {
+                    console.log(item, 'filtered item in map list.js')
                   return (
                     <TableRow key={i}>
                     <TableCell>
@@ -57,7 +60,12 @@ export default class PriceListComponent extends PureComponent {
                       <TableCell>
                         {item.get('Price')}
                       </TableCell>
-                    </Hidden>                    
+                    </Hidden>
+                    <Hidden xsDown>
+                      <TableCell>
+                        {item.get('Category')}
+                      </TableCell>
+                    </Hidden>                     
                     <TableCell>
                       <FlexView hAlignContent='right'>
                         <FontAwesome name='fas fa-plus-circle' size='2x' style={{ color: 'grey' }}/>

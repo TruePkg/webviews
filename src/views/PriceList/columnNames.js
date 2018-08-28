@@ -19,6 +19,11 @@ export const ColumnNames = (
         Price
       </TableCell>
     </Hidden>
+    <Hidden xsDown>  
+      <TableCell>
+        Category
+      </TableCell>
+    </Hidden>
     <TableCell>
       <FlexView hAlignContent='right'>
         <FontAwesome name='fas fa-plus-circle' size='2x' style={{ color: 'grey' }}/>

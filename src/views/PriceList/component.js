@@ -42,11 +42,11 @@ export class PriceListComponent extends PureComponent {
   render() {
     return (
       <Grid fluid>
-        <SearchBar/>
+        <SearchBar inventory={this.props.inventory} />
         {
           this.props.category ?
-          <Category /> :
-          <List inventory={this.props.inventory}/> 
+          <Category toggleListView={this.props.toggleListView} filterItems={this.props.filterItems} inventory={this.props.inventory}/> :
+          <List filteredItems={this.props.filteredItems} inventory={this.props.inventory} /> 
         }
       </Grid>
     )

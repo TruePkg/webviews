@@ -33,8 +33,8 @@ class PriceListState extends Record({
   catalog: false,
   listView: true,
   category: false,
-  filteredItems: [],
-  inventory: []
+  filteredItems: List(),
+  inventory: List()
 }) {}
 
 const toInitialState = state =>
